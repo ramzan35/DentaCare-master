@@ -1,0 +1,275 @@
+{
+  "project_info": {
+    "project_number": "864616280720",
+    "firebase_url": "https://dentacare-9e5f6.firebaseio.com",
+    "project_id": "dentacare-9e5f6",
+    "storage_bucket": "dentacare-9e5f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864616280720:android:c490c9a9cdffb591",
+        "android_client_info": {
+          "package_name": "com.example.ramzandieze.last"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864616280720-2bud61gb0tauccg8941dbgvct9rjuthg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ramzandieze.last",
+            "certificate_hash": "ae76cb796732358d4dbe928500ed5e43e5a5d2f3"
+          }
+        },
+        {
+          "client_id": "864616280720-ej5ua7pq9o8ajngcbj1nj3mqal9v2rfe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQr6rncB9oL2m1Ey2ZOFNMO6l0-noUmFA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864616280720-ej5ua7pq9o8ajngcbj1nj3mqal9v2rfe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864616280720:android:57b4ffae8b824416",
+        "android_client_info": {
+          "package_name": "com.example.ramzandieze.dentacare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864616280720-36kl996d6llhdln08n6i9g5qmbbs0npu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ramzandieze.dentacare",
+            "certificate_hash": "ae76cb796732358d4dbe928500ed5e43e5a5d2f3"
+          }
+        },
+        {
+          "client_id": "864616280720-ej5ua7pq9o8ajngcbj1nj3mqal9v2rfe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQr6rncB9oL2m1Ey2ZOFNMO6l0-noUmFA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864616280720-ej5ua7pq9o8ajngcbj1nj3mqal9v2rfe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864616280720:android:6479d7ac33a0ac6c",
+        "android_client_info": {
+          "package_name": "com.example.ramzandieze.firebaselogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864616280720-1opt0ntcna66nb0bs09l4joguc6ahnti.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ramzandieze.firebaselogin",
+            "certificate_hash": "ae76cb796732358d4dbe928500ed5e43e5a5d2f3"
+          }
+        },
+        {
+          "client_id": "864616280720-ej5ua7pq9o8ajngcbj1nj3mqal9v2rfe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQr6rncB9oL2m1Ey2ZOFNMO6l0-noUmFA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864616280720-ej5ua7pq9o8ajngcbj1nj3mqal9v2rfe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864616280720:android:d842af33038fad5c",
+        "android_client_info": {
+          "package_name": "info.androidhive.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864616280720-4qahf1kh2cmiq39ls8uaplfacp5a1btl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.androidhive.firebase",
+            "certificate_hash": "ae76cb796732358d4dbe928500ed5e43e5a5d2f3"
+          }
+        },
+        {
+          "client_id": "864616280720-ej5ua7pq9o8ajngcbj1nj3mqal9v2rfe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQr6rncB9oL2m1Ey2ZOFNMO6l0-noUmFA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864616280720-ej5ua7pq9o8ajngcbj1nj3mqal9v2rfe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864616280720:android:1a1c30b258283271",
+        "android_client_info": {
+          "package_name": "iit.dentacare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864616280720-m79kmano9kbil42qtc5jbi4micrh20bs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iit.dentacare",
+            "certificate_hash": "ae76cb796732358d4dbe928500ed5e43e5a5d2f3"
+          }
+        },
+        {
+          "client_id": "864616280720-ej5ua7pq9o8ajngcbj1nj3mqal9v2rfe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQr6rncB9oL2m1Ey2ZOFNMO6l0-noUmFA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864616280720-ej5ua7pq9o8ajngcbj1nj3mqal9v2rfe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864616280720:android:3893bbd7fc657f5a",
+        "android_client_info": {
+          "package_name": "info.ramzandieze.dentacare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864616280720-gv76s37fb1t2bompouk185a26krn4bim.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.ramzandieze.dentacare",
+            "certificate_hash": "ae76cb796732358d4dbe928500ed5e43e5a5d2f3"
+          }
+        },
+        {
+          "client_id": "864616280720-ej5ua7pq9o8ajngcbj1nj3mqal9v2rfe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQr6rncB9oL2m1Ey2ZOFNMO6l0-noUmFA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864616280720-ej5ua7pq9o8ajngcbj1nj3mqal9v2rfe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
