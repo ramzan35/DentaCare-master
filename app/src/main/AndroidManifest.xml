@@ -16,9 +16,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name="iit.dentacare.LoginActivity"
+            android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,23 +25,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="iit.dentacare.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
-            android:name="iit.dentacare.ResetPasswordActivity"
+            android:name=".ResetPasswordActivity"
             android:label="@string/title_activity_reset_password"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DeviceList"
-            android:label="@string/app_name">
-        </activity>
-
+            android:label="@string/app_name" />
+        <activity android:name=".Registration" />
+        <activity android:name=".UserProfile"></activity>
     </application>
 
 </manifest>

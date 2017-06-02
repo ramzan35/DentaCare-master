@@ -56,7 +56,7 @@
         <!-- Login Button -->
 
         <Button
-            android:id="@+id/loginButton"
+            android:id="@+id/btn_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
@@ -65,7 +65,7 @@
             android:textColor="@android:color/black" />
 
         <Button
-            android:id="@+id/resetPasswordButton"
+            android:id="@+id/btn_reset_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
@@ -76,6 +76,16 @@
 
         <!-- Link to Login Screen -->
 
+        <Button
+            android:id="@+id/btn_signup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@null"
+            android:text="@string/btn_link_to_register"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
     </LinearLayout>
 
     <ProgressBar

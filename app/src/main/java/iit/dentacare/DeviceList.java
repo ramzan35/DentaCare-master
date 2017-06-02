@@ -102,7 +102,7 @@ public class DeviceList extends AppCompatActivity
             Intent i = new Intent(DeviceList.this, MainActivity.class);
 
             //Change the activity.
-            i.putExtra(EXTRA_ADDRESS, address); //this will be received at ledControl (class) Activity
+            i.putExtra(EXTRA_ADDRESS, address);
             startActivity(i);
         }
     };

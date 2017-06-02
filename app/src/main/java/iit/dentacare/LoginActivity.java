@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
     private ProgressBar progressBar;
-    private Button loginButton, resetButton;
+    private Button btnSignup,loginButton, resetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +44,9 @@ public class LoginActivity extends AppCompatActivity {
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        loginButton = (Button) findViewById(R.id.loginButton);
-        resetButton = (Button) findViewById(R.id.resetPasswordButton);
+        loginButton = (Button) findViewById(R.id.btn_login);
+        btnSignup = (Button) findViewById(R.id.btn_signup);
+        resetButton = (Button) findViewById(R.id.btn_reset_password);
 
         auth = FirebaseAuth.getInstance();
 
@@ -53,6 +54,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+            }
+        });
+
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, Registration.class));
             }
         });
 
@@ -73,6 +81,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 progressBar.setVisibility(View.VISIBLE);
+
+                System.out.println("hjghg");
 
                 auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {

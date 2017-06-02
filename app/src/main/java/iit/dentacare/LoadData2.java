@@ -9,46 +9,35 @@ import android.icu.text.SimpleDateFormat;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class LoadData2 extends Thread{
-    private static final String TAG_RESULTS = "result";
-    private static final String TAG_ID = "id";
-    private static final String TAG_NAME = "name";
-    private static final String TAG_ADD = "address";
+
+public class LoadData2 extends Thread {
+
+    private static DatabaseReference databaseUser;
 
     String myJSON;
-    int num1=0;
-    int num2=0;
-    int num3=0;
-    int num4=0;
+    static int num1 = 0;
+    static int num2 = 0;
+    static int num3 = 0;
+    static int num4 = 0;
 
-
-    JSONArray peoples = null;
     ProgressBar p1;
     ProgressBar p2;
     ProgressBar p3;
@@ -56,29 +45,46 @@ public class LoadData2 extends Thread{
 
     DateFormat g = new SimpleDateFormat("HH:mm:ss");
 
+    public LoadData2(){}
 
-
-    public LoadData2(ProgressBar p1, ProgressBar p2,ProgressBar p3,ProgressBar p4) {
+    public LoadData2(ProgressBar p1, ProgressBar p2, ProgressBar p3, ProgressBar p4) {
         this.p1 = p1;
         this.p2 = p2;
         this.p3 = p3;
         this.p4 = p4;
     }
 
+    /**
+     * The method increases the counter on each region of the mouth
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void run() {
-        while(true){
+        long value = 0;
+        while (true) {
+            //retrieveRecords();
 
-            //System.out.println("afdafdsaf");
-            //while (true) {
-            getData();
-            //test();
+            value++;
+//            System.out.println("value is " + value);
+
+            if (value < 10) {
+                num1++;
+
+            } else if (value < 15) {
+                num2++;
+
+            } else if (value < 20) {
+                num3++;
+
+            } else if (value < 30) {
+                num4++;
+
+            }
+
+
             p1.setProgress(num1);
             p2.setProgress(num2);
             p3.setProgress(num3);
             p4.setProgress(num4);
-            //}
-
 
             try {
                 Thread.sleep(1000);
@@ -89,51 +95,49 @@ public class LoadData2 extends Thread{
     }
 
 
-    public void getData() {
-        String ans = "";
-        class GetDataJSON extends AsyncTask<String, Void, String> {
+    /**
+     * This method gets data from the server
+     */
+    private void retrieveRecords() {
+        class RetrieveJSONRecords extends AsyncTask<String, Void, String> {
 
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             protected String doInBackground(String... params) {
-
-
                 long value = 0;
                 long ans = 0;
 
+                while (value <= 1000) {
+                    /*num1++;
+                    num2++;
+                    num3++;
+                    num4++;*/
 
-                while(value<=1000){
                     DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
-                    HttpPost httppost = new HttpPost("http://sdgp.coolpage.biz/getdata.php");
+                    HttpPost post = new HttpPost("http://sdgp.coolpage.biz/returnJSONData.php");
 
-                    // Depends on your web service
-                    httppost.setHeader("Content-type", "application/json");
+                    post.setHeader("Content-type", "application/json");
 
-                    InputStream inputStream = null;
+                    InputStream stream = null;
                     String result = null;
                     try {
-                        HttpResponse response = httpclient.execute(httppost);
-                        HttpEntity entity = response.getEntity();
+                        HttpResponse httpResponse = httpclient.execute(post);
+                        HttpEntity httpResponseEntity = httpResponse.getEntity();
 
-                        inputStream = entity.getContent();
-                        // json is UTF-8 by default
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
-                        StringBuilder sb = new StringBuilder();
+                        stream = httpResponseEntity.getContent();
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream, "UTF-8"), 8);
+                        StringBuilder stringBuilder = new StringBuilder();
 
-                        String line = null;
-                        while ((line = reader.readLine()) != null) {
-                            sb.append(line + "\n");
+                        String record;
+                        while ((record = bufferedReader.readLine()) != null) {
+                            stringBuilder.append(record + "\n");
                         }
-                        result = sb.toString();
-                        result = result.split(":")[2].split(",")[0];
-                        //System.out.println("hey");
-                        //System.out.println(result);
-                        //todo MainActivity.dsf = result;
+                        result = stringBuilder.toString().split(":")[2].split(",")[0];
                     } catch (Exception e) {
-                        // Oops
+                        System.out.println(e);
                     } finally {
                         try {
-                            if (inputStream != null) inputStream.close();
+                            if (stream != null) stream.close();
                         } catch (Exception squish) {
                         }
                     }
@@ -143,100 +147,65 @@ public class LoadData2 extends Thread{
                     long a2 = g.getCalendar().getTimeInMillis();
 
                     long diff = (a1 - a2);
-                    //System.out.println(diff);
-                    g=df;
+                    g = df;
 
-                    value += diff;
-                    if (value >= 1000) {
+                    //value += diff;
+
+
+                    if (value >= 30) {
                         value = 0;
-                        System.out.println(ans);
-                        ans++;
-                        MainActivity.dsf++;
-                        if(result.equalsIgnoreCase("\"UP_LEFT\"")){
+                        System.out.println(value);
+                        //ans++;
+                        //MainActivity.dsf++;
+                        /*if (result.equalsIgnoreCase("\"UP_LEFT\"")) {
                             num1++;
 
-                        }else if (result.equalsIgnoreCase("\"UP_RIGHT\"")){
+                        } else if (result.equalsIgnoreCase("\"UP_RIGHT\"")) {
                             num2++;
 
-                        }else if (result.equalsIgnoreCase("\"DOWN_LEFT\"")){
+                        } else if (result.equalsIgnoreCase("\"DOWN_LEFT\"")) {
                             num3++;
 
-                        }else if (result.equalsIgnoreCase("\"DOWN_RIGHT\"")){
+                        } else if (result.equalsIgnoreCase("\"DOWN_RIGHT\"")) {
                             num4++;
 
-                        }
+                        }*/
 
 
-                        //p.setProgress(12);
-
-                        //MainActivity.p;
-
-
-                        //p.setProgress(p.getProgress() + 1);
                     }
-
                 }
-
-                //ans = result;
                 return "";
             }
 
             @Override
             protected void onPostExecute(String result) {
                 myJSON = result;
-                //showList();
             }
         }
-        GetDataJSON g = new GetDataJSON();
+        RetrieveJSONRecords g = new RetrieveJSONRecords();
 
         g.execute();
-
-
-
     }
 
+    public static void saveData() {
 
+        databaseUser = FirebaseDatabase.getInstance().getReference("dentaldiseaserecord");
 
+        String status = "";
+
+        if (num1 == 15 && num2 == 15 && num3 == 15 && num4 == 15) {
+            status = "Good";
+        } else if ((num1 > 12 && num1 < 18) && (num2 > 12 && num2 < 18) && (num3 > 12 && num3 < 18) && (num4 > 12 && num4 < 18)) {
+            status = "Average";
+        } else {
+            status = "incomplete";
+        }
+
+        String id = "DC001";
+        Date elapsedTime = new Date();
+        DentalDiseaseRecord record = new DentalDiseaseRecord(id, elapsedTime, status, new Date ());
+
+        databaseUser.child(id).setValue(record);
+
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

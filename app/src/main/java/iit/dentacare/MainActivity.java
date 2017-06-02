@@ -40,12 +40,14 @@ import java.util.UUID;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener { //registration ethu da?
+    //nee file onnu podu
+    //nan senjadu errors varudu
 
     static int dsf;
 
     private Button signOut, monitorX;
-//    private ProgressBar progressBar;
+    //    private ProgressBar progressBar;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
     public static String uID;
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Intent newint = getIntent();
         BLUE_MAC_ADDRESS = newint.getStringExtra(DeviceList.EXTRA_ADDRESS);
-        Toast.makeText(this,BLUE_MAC_ADDRESS,Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, BLUE_MAC_ADDRESS, Toast.LENGTH_LONG).show();
         auth = FirebaseAuth.getInstance();
 
         authListener = new FirebaseAuth.AuthStateListener() {
@@ -132,6 +134,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         monitorX.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               /* LoadData2 l = new LoadData2(p1, p2, p3, p4);
+
+                l.start();
+
 //                Toast.makeText(getApplicationContext(),"came",Toast.LENGTH_LONG).show();
 //                monitor.setEnabled(false);
 //                if (initializeBluetooth()) {
@@ -144,9 +150,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                }else{
 //                    Toast.makeText(getApplicationContext(),"Please pair with your DentaCare device",Toast.LENGTH_LONG).show();
 //                }
-                }catch (Exception e){
+                } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "There is a problem..", Toast.LENGTH_LONG).show();
-                }
+                }*/
+               LoadData2.saveData();
             }
         });
         /*Timer t = new Timer(p, dsf);
@@ -222,14 +229,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_profile) {
+            Intent intent = new Intent(MainActivity.this, UserProfile.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_alarm) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+        } else if (id == R.id.nav_login) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_devicelist) {
+            Intent intent = new Intent(MainActivity.this, DeviceList.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -271,55 +284,110 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return connected;
     }
 
+//    void getData() {
+//        final android.os.Handler handler = new android.os.Handler();
+////        buffer = new byte[1024];
+//        Toast.makeText(getApplicationContext(), "X1", Toast.LENGTH_LONG).show();
+//
+//        final Thread thread = new Thread(new Runnable() {
+//            public void run() {
+////                Toast.makeText(getApplicationContext(), "X2", Toast.LENGTH_LONG).show();
+//                while (true) {
+//                    try {
+//                        int byteCount = inputStream.available();
+//                        if (byteCount > 0) {
+//                            byte[] rawBytes = new byte[byteCount];
+//                            int bytes = inputStream.read(rawBytes);
+//                            final String string = new String(rawBytes, 0, bytes);
+//
+//                            try {
+////                                Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+//                                final String[] arr = string.split(";");
+//                                final String[] data = arr[0].split(",");
+//
+//                                final int ort = Integer.parseInt(data[0]);
+//                                final int nmb = Integer.parseInt(data[1]);
+//
+//                                handler.post(new Runnable() {
+//                                    public void run() {
+//                                        while (true) {
+////                                        Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+//                                            addUsers(ort, nmb);
+//                                            //try to slow down the toasting
+//                                            break;
+//                                        }
+//                                    }
+//                                });
+//                            }catch (Exception e){
+//                                Toast.makeText(getApplicationContext(), "Fucked", Toast.LENGTH_LONG).show();
+//                            }
+//                        }else{
+//                            Toast.makeText(getApplicationContext(), "No Data", Toast.LENGTH_LONG).show();
+//                        }
+//                    } catch (Exception ex) {
+////                        Thread.currentThread().interrupt();
+//                        break;
+//                    }
+//                    SystemClock.sleep(800);
+//                }
+//            }
+//        });
+//
+//        thread.start();
+//    }
+
     void getData() {
         final android.os.Handler handler = new android.os.Handler();
 //        buffer = new byte[1024];
-        Toast.makeText(getApplicationContext(), "X1", Toast.LENGTH_LONG).show();
-
+//        Toast.makeText(getApplicationContext(), "Came3", Toast.LENGTH_LONG).show();
         final Thread thread = new Thread(new Runnable() {
             public void run() {
-//                Toast.makeText(getApplicationContext(), "X2", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Why", Toast.LENGTH_LONG).show();
                 while (true) {
+//                    Toast.makeText(getApplicationContext(), "VVVV", Toast.LENGTH_LONG).show();
                     try {
                         int byteCount = inputStream.available();
+//                        Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
                         if (byteCount > 0) {
+//                            Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_LONG).show();
+//                            byte[] rawBytes = new byte[byteCount];
+//                            int bytes = inputStream.read(rawBytes);
+//                            final String string = new String(rawBytes, 0, bytes);
                             byte[] rawBytes = new byte[byteCount];
-                            int bytes = inputStream.read(rawBytes);
-                            final String string = new String(rawBytes, 0, bytes);
+                            inputStream.read(rawBytes);
+                            final String string = new String(rawBytes, "UTF-8");
 
                             try {
-                                Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+//                                Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
                                 final String[] arr = string.split(";");
                                 final String[] data = arr[0].split(",");
-
+//
                                 final int ort = Integer.parseInt(data[0]);
                                 final int nmb = Integer.parseInt(data[1]);
 
                                 handler.post(new Runnable() {
                                     public void run() {
                                         while (true) {
-//                                        Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
+//                                        Toast.makeText(getApplicationContext(), ort+" "+nmb, Toast.LENGTH_LONG).show();
                                             addUsers(ort, nmb);
                                             //try to slow down the toasting
                                             break;
                                         }
                                     }
                                 });
-                            }catch (Exception e){
-                                Toast.makeText(getApplicationContext(), "Fucked", Toast.LENGTH_LONG).show();
+                            } catch (Exception e) {
+//                                Toast.makeText(getApplicationContext(), "incomplete readings", Toast.LENGTH_LONG).show();
                             }
-                        }else{
-                            Toast.makeText(getApplicationContext(), "No Data", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception ex) {
-//                        Thread.currentThread().interrupt();
+                        Thread.currentThread().interrupt();
                         break;
                     }
                     SystemClock.sleep(800);
                 }
             }
         });
-
+        if(!thread.isInterrupted())
         thread.start();
     }
 
