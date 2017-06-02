@@ -201,11 +201,11 @@ public class LoadData2 extends Thread {
             status = "incomplete";
         }
 
-        String id = "DC001";
+        String id = MainActivity.uID;
         Date elapsedTime = new Date();
         DentalDiseaseRecord record = new DentalDiseaseRecord(id, elapsedTime, status, new Date ());
 
-        databaseUser.child(id).setValue(record);
+        databaseUser.child(id).child(new Date ().toString()).setValue(record);
 
     }
 }

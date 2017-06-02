@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         };
 
-        databaseUser = FirebaseDatabase.getInstance().getReference("users");
+        databaseUser = FirebaseDatabase.getInstance().getReference("device");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +123,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        if (progressBar != null) {
 //            progressBar.setVisibility(View.GONE);
 //        }
+
+        uID = auth.getCurrentUser().getUid();
 
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -243,9 +245,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, DeviceList.class);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_share) {
+//        } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+//        } else if (id == R.id.nav_send) {
 
         }
 
@@ -408,7 +410,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else
             orientation = "DOWN_RIGHT";
 
-        String id = "DC001";
+        String id = uID;
 
         User user = new User(id, orientation, acceleration);
 
