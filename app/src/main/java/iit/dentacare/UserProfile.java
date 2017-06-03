@@ -1,10 +1,12 @@
 package iit.dentacare;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 public class UserProfile extends AppCompatActivity implements View.OnClickListener {
 
@@ -91,6 +95,20 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         }catch(){
         }*/
 
+        storage.child("Photos").child(emailID).child("myImage.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                // Got the download URL for 'users/me/profile.png'
+                Picasso.with(UserProfile.this).load(uri).into(userPic);
+                Log.d("Output", uri.toString());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.d("Output", "Image Not Found");
+            }
+        });
+
         final Query userQuery = users.orderByChild("Email");
 
         userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -141,17 +159,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             i.setType("image/*");
             i.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(i, "Select Picture"), 100);
-
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-
-        Intent intent = new Intent(UserProfile.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-
     }
 
     @Override
@@ -169,8 +177,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
             StorageReference imagePath = storage.child("Photos").child(emailID).child("myImage.jpg");
 
-            DatabaseReference users = database.getReference("users");
-            users.child(name).child("Username").setValue(imagePath);
+            DatabaseReference users = database.getReference("user");
+            users.child(name).child("ImagePath").setValue(imagePath.toString());
 
             Log.d("Output", imagePath.toString());
 
@@ -186,6 +194,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             });
 
         }
+        startActivity(new Intent(this, UserProfile.class));
     }
 
     private void changeImage(){
