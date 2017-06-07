@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BluetoothSocket btSocket;
     private InputStream inputStream;
     static boolean deviceOff;
+    static int brushingTime;
     ProgressBar p1;
     ProgressBar p2;
     ProgressBar p3;
@@ -131,28 +133,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         monitorX.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                LoadData2 l = new LoadData2(p1, p2, p3, p4);
+                Stopwatch timerFlow = new Stopwatch();
+                LoadData2 l = new LoadData2(p1, p2, p3, p4);
+                l.start();
 
-//                l.start();
+                try {
+                    if (connectBluetooth()) {
+                        getData();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "There is a problem with connecting to your DentaCare device", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "There is a problem..", Toast.LENGTH_LONG).show();
+                }
 
-//                Toast.makeText(getApplicationContext(),"came",Toast.LENGTH_LONG).show();
-//                monitor.setEnabled(false);
-//                if (initializeBluetooth()) {
-//                try {
-//                    if (connectBluetooth()) {
-//                        getData();
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "There is a problem with connecting to your DentaCare device", Toast.LENGTH_LONG).show();
-//                    }
-//                }else{
-//                    Toast.makeText(getApplicationContext(),"Please pair with your DentaCare device",Toast.LENGTH_LONG).show();
-//                }
-//                } catch (Exception e) {
-//                    Toast.makeText(getApplicationContext(), "There is a problem..", Toast.LENGTH_LONG).show();
-//                }
-
-//               if(deviceOff)
-//                   l.stop();
+               if(deviceOff) {
+                   l.stop();
+                   brushingTime = (int) timerFlow.elapsedTime();
+               }
 
                LoadData2.saveData();
             }

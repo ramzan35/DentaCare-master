@@ -192,17 +192,9 @@ public class LoadData2 extends Thread {
 
         DentalDiseaseRecord.Status status = new DentalDiseaseRecord.Status(upLeft,upRight,downLeft,downRight);
 
-//        if (num1 == 15 && num2 == 15 && num3 == 15 && num4 == 15) {
-//            status = "Good";
-//        } else if ((num1 > 12 && num1 < 18) && (num2 > 12 && num2 < 18) && (num3 > 12 && num3 < 18) && (num4 > 12 && num4 < 18)) {
-//            status = "Average";
-//        } else {
-//            status = "incomplete";
-//        }
-
         String id = MainActivity.uID;
-        Date elapsedTime = new Date();
-        DentalDiseaseRecord record = new DentalDiseaseRecord(id, elapsedTime, status, new Date ());
+
+        DentalDiseaseRecord record = new DentalDiseaseRecord(id, MainActivity.brushingTime, status, new Date ());
 
         databaseUser.child(id).child(new Date ().toString()).setValue(record);
 

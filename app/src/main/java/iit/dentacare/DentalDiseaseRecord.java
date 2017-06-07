@@ -9,11 +9,11 @@ import java.util.Date;
 public class DentalDiseaseRecord {
 
     private String userId;
-    private Date  brushingTime;
+    private int brushingTime;
     private Status status;
     private Date  date;
 
-    public DentalDiseaseRecord(String userId, Date  brushingTime, Status status, Date  date){
+    public DentalDiseaseRecord(String userId, int  brushingTime, Status status, Date  date){
         this.userId = userId;
         this.brushingTime = brushingTime;
         this.status = status;
@@ -28,11 +28,11 @@ public class DentalDiseaseRecord {
         this.userId = userId;
     }
 
-    public String getBrushingTime() {
-        return brushingTime.toString();
+    public int getBrushingTime() {
+        return brushingTime;
     }
 
-    public void setBrushingTime(Date brushingTime) {
+    public void setBrushingTime(int brushingTime) {
         this.brushingTime = brushingTime;
     }
 
