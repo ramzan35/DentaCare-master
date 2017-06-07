@@ -10,10 +10,10 @@ public class DentalDiseaseRecord {
 
     private String userId;
     private Date  brushingTime;
-    private String status;
+    private Status status;
     private Date  date;
 
-    public DentalDiseaseRecord(String userId, Date  brushingTime, String status, Date  date){
+    public DentalDiseaseRecord(String userId, Date  brushingTime, Status status, Date  date){
         this.userId = userId;
         this.brushingTime = brushingTime;
         this.status = status;
@@ -37,10 +37,10 @@ public class DentalDiseaseRecord {
     }
 
     public String getStatus() {
-        return status;
+        return status.toString();
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -50,6 +50,26 @@ public class DentalDiseaseRecord {
 
     public void setDate(Date  date) {
         this.date = date;
+    }
+
+    static class Status{
+
+        int upLeft;
+        int upRight;
+        int downLeft;
+        int downRight;
+
+
+        public Status(int upLeft,int upRight,int downleft,int downRight){
+            this.upLeft = upLeft;
+            this.upRight = upRight;
+            this.downLeft = downleft;
+            this.downRight = downRight;
+        }
+
+        public String toString(){//overriding the toString() method
+            return "upLeft="+upLeft+" upRight="+upRight+" downLeft="+downLeft+" downRight="+downRight;
+        }
     }
 
 }

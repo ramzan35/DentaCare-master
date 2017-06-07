@@ -10,7 +10,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -33,10 +32,10 @@ public class LoadData2 extends Thread {
     private static DatabaseReference databaseUser;
 
     String myJSON;
-    static int num1 = 0;
-    static int num2 = 0;
-    static int num3 = 0;
-    static int num4 = 0;
+    static int upLeft = 0;
+    static int upRight = 0;
+    static int downLeft = 0;
+    static int downRight = 0;
 
     ProgressBar p1;
     ProgressBar p2;
@@ -67,24 +66,24 @@ public class LoadData2 extends Thread {
 //            System.out.println("value is " + value);
 
             if (value < 10) {
-                num1++;
+                upLeft++;
 
             } else if (value < 15) {
-                num2++;
+                upRight++;
 
             } else if (value < 20) {
-                num3++;
+                downLeft++;
 
             } else if (value < 30) {
-                num4++;
+                downRight++;
 
             }
 
 
-            p1.setProgress(num1);
-            p2.setProgress(num2);
-            p3.setProgress(num3);
-            p4.setProgress(num4);
+            p1.setProgress(upLeft);
+            p2.setProgress(upRight);
+            p3.setProgress(downLeft);
+            p4.setProgress(downRight);
 
             try {
                 Thread.sleep(1000);
@@ -191,15 +190,15 @@ public class LoadData2 extends Thread {
 
         databaseUser = FirebaseDatabase.getInstance().getReference("dentaldiseaserecord");
 
-        String status = "";
+        DentalDiseaseRecord.Status status = new DentalDiseaseRecord.Status(upLeft,upRight,downLeft,downRight);
 
-        if (num1 == 15 && num2 == 15 && num3 == 15 && num4 == 15) {
-            status = "Good";
-        } else if ((num1 > 12 && num1 < 18) && (num2 > 12 && num2 < 18) && (num3 > 12 && num3 < 18) && (num4 > 12 && num4 < 18)) {
-            status = "Average";
-        } else {
-            status = "incomplete";
-        }
+//        if (num1 == 15 && num2 == 15 && num3 == 15 && num4 == 15) {
+//            status = "Good";
+//        } else if ((num1 > 12 && num1 < 18) && (num2 > 12 && num2 < 18) && (num3 > 12 && num3 < 18) && (num4 > 12 && num4 < 18)) {
+//            status = "Average";
+//        } else {
+//            status = "incomplete";
+//        }
 
         String id = MainActivity.uID;
         Date elapsedTime = new Date();

@@ -4,27 +4,25 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,12 +31,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
-import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener { //registration ethu da?
     //nee file onnu podu
@@ -57,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BluetoothDevice device;
     private BluetoothSocket btSocket;
     private InputStream inputStream;
+    static boolean deviceOff;
     ProgressBar p1;
     ProgressBar p2;
     ProgressBar p3;
@@ -136,25 +131,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         monitorX.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* LoadData2 l = new LoadData2(p1, p2, p3, p4);
+//                LoadData2 l = new LoadData2(p1, p2, p3, p4);
 
-                l.start();
+//                l.start();
 
 //                Toast.makeText(getApplicationContext(),"came",Toast.LENGTH_LONG).show();
 //                monitor.setEnabled(false);
 //                if (initializeBluetooth()) {
-                try {
-                    if (connectBluetooth()) {
-                        getData();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "There is a problem with connecting to your DentaCare device", Toast.LENGTH_LONG).show();
-                    }
+//                try {
+//                    if (connectBluetooth()) {
+//                        getData();
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "There is a problem with connecting to your DentaCare device", Toast.LENGTH_LONG).show();
+//                    }
 //                }else{
 //                    Toast.makeText(getApplicationContext(),"Please pair with your DentaCare device",Toast.LENGTH_LONG).show();
 //                }
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "There is a problem..", Toast.LENGTH_LONG).show();
-                }*/
+//                } catch (Exception e) {
+//                    Toast.makeText(getApplicationContext(), "There is a problem..", Toast.LENGTH_LONG).show();
+//                }
+
+//               if(deviceOff)
+//                   l.stop();
+
                LoadData2.saveData();
             }
         });
@@ -236,7 +235,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_alarm) {
-
+            Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_login) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
@@ -378,7 +379,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     }
                                 });
                             } catch (Exception e) {
+                                deviceOff = true;
 //                                Toast.makeText(getApplicationContext(), "incomplete readings", Toast.LENGTH_LONG).show();
+                                Log.d("incomplete readings",e.toString());
                             }
                         }
                     } catch (Exception ex) {
