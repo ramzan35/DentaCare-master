@@ -11,8 +11,12 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -37,6 +41,9 @@ public class LoadData2 extends Thread {
     static int downLeft = 0;
     static int downRight = 0;
 
+    static final String[] orientation = new String[1];
+
+
     ProgressBar p1;
     ProgressBar p2;
     ProgressBar p3;
@@ -44,7 +51,8 @@ public class LoadData2 extends Thread {
 
     DateFormat g = new SimpleDateFormat("HH:mm:ss");
 
-    public LoadData2(){}
+    public LoadData2() {
+    }
 
     public LoadData2(ProgressBar p1, ProgressBar p2, ProgressBar p3, ProgressBar p4) {
         this.p1 = p1;
@@ -59,31 +67,57 @@ public class LoadData2 extends Thread {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void run() {
         long value = 0;
-        while (true) {
-            //retrieveRecords();
+        //orientation[0] = "UP_LEFT";
 
-            value++;
-//            System.out.println("value is " + value);
+        FirebaseAuth au = FirebaseAuth.getInstance();
 
-            if (value < 10) {
-                upLeft++;
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("device").child(au.getCurrentUser().getUid()).child("orientation");
 
-            } else if (value < 15) {
-                upRight++;
 
-            } else if (value < 20) {
-                downLeft++;
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                orientation[0] = dataSnapshot.getValue(String.class);
 
-            } else if (value < 30) {
-                downRight++;
 
+                System.out.println(" Value in orientation is " + orientation[0]);
             }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-            p1.setProgress(upLeft);
-            p2.setProgress(upRight);
-            p3.setProgress(downLeft);
-            p4.setProgress(downRight);
+            }
+        });
+
+
+        while (true) {
+
+            //System.out.println(orientation[0]);
+
+            try {
+                if (orientation[0].equalsIgnoreCase("UP_LEFT")) {
+                    upLeft++;
+                    p1.setProgress(upLeft);
+
+                } else if (orientation[0].equalsIgnoreCase("UP_RIGHT")) {
+                    upRight++;
+                    p2.setProgress(upRight);
+
+                } else if (orientation[0].equalsIgnoreCase("DOWN_LEFT")) {
+                    downLeft++;
+                    p3.setProgress(downLeft);
+
+                } else if (orientation[0].equalsIgnoreCase("DOWN_RIGHT")) {
+                    downRight++;
+                    p4.setProgress(downRight);
+
+                }
+            } catch (NullPointerException n) {
+                System.out.println("Null Still");
+            }
+
+            System.out.println(upLeft + " " + upRight + " " + downRight + " " + downLeft);
 
             try {
                 Thread.sleep(1000);
@@ -190,13 +224,13 @@ public class LoadData2 extends Thread {
 
         databaseUser = FirebaseDatabase.getInstance().getReference("dentaldiseaserecord");
 
-        DentalDiseaseRecord.Status status = new DentalDiseaseRecord.Status(upLeft,upRight,downLeft,downRight);
+        DentalDiseaseRecord.Status status = new DentalDiseaseRecord.Status(upLeft, upRight, downLeft, downRight);
 
         String id = MainActivity.uID;
 
-        DentalDiseaseRecord record = new DentalDiseaseRecord(id, MainActivity.brushingTime, status, new Date ());
+        DentalDiseaseRecord record = new DentalDiseaseRecord(id, MainActivity.brushingTime, status, new Date());
 
-        databaseUser.child(id).child(new Date ().toString()).setValue(record);
+        databaseUser.child(id).child(new Date().toString()).setValue(record);
 
     }
 }

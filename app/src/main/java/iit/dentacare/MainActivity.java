@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         monitorX.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Stopwatch timerFlow = new Stopwatch();
+//                Stopwatch timerFlow = new Stopwatch();
                 LoadData2 l = new LoadData2(p1, p2, p3, p4);
                 l.start();
 
@@ -147,12 +147,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Toast.makeText(getApplicationContext(), "There is a problem..", Toast.LENGTH_LONG).show();
                 }
 
-               if(deviceOff) {
-                   l.stop();
-                   brushingTime = (int) timerFlow.elapsedTime();
-               }
+//               if(deviceOff) {
+//                   l.stop();
+//                   brushingTime = (int) timerFlow.elapsedTime();
+//               }
 
-               LoadData2.saveData();
+//               LoadData2.saveData();
             }
         });
         /*Timer t = new Timer(p, dsf);

@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -49,6 +47,9 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     private static String name;
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +73,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
 
         final FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
 
         userPic = (ImageView) findViewById(R.id.userPic);
         userName = (TextView) findViewById(R.id.username);
@@ -205,11 +208,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        Intent intent = new Intent(UserProfile.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

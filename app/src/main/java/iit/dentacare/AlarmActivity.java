@@ -63,4 +63,11 @@ public class AlarmActivity extends AppCompatActivity {
 
         alarmManager.cancel(pendingIntent);
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AlarmActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
